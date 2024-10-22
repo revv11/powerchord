@@ -12,9 +12,13 @@ const useListenMessages = () =>{
     useEffect(()=>{
         socket?.on("newMessage", (newMessages: MessageType)=>{
            setMessages([...messages, newMessages])
-           console.log("updatedmessages???")
+           
 
         })
+
+        return ()=>{
+            socket?.off("newMessage")
+        }
     },[socket, messages , setMessages])
 }
 

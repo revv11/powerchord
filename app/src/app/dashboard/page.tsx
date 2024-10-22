@@ -17,7 +17,7 @@ export default function ChatPage() {
     const {users , loading} = useGetUsers();
     if(loading){
         return(
-            <div>
+            <div className='flex justify-center items-center'>
                 Loading...
             </div>
         )

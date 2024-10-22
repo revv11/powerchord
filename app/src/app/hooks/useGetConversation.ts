@@ -6,7 +6,7 @@ import useConversation from "@/zustand/useConversation";
 export const useGetConversation = ()=>{
     const {selectedConversation, setMessages, messages} = useConversation()
     const [loading , setLoading] = useState(false);
-    const [conversation , setConversation] = useState<MessageType[]>()
+    
 
 
     useEffect(()=>{
@@ -19,7 +19,7 @@ export const useGetConversation = ()=>{
                 const res = await axios.get(`http://localhost:3000/api/messages/get/${selectedConversation?.username}`)
                 
                 
-                setConversation(res.data.messages)
+                setMessages(res.data.messages)
                 setLoading(false)
                 
             }
@@ -30,7 +30,5 @@ export const useGetConversation = ()=>{
         getConversation();
     },[selectedConversation, setMessages])
 
-    return({
-        loading,conversation
-    })
+    return {messages, loading}
 }   

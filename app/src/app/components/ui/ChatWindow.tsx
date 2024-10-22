@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState } from 'react';
 import useConversation from '@/zustand/useConversation';
 import NoChatSelected from './NoChatSelected';
@@ -5,20 +6,20 @@ import axios from 'axios';
 import { useGetConversation } from '@/app/hooks/useGetConversation';
 import useListenMessages from '@/app/hooks/useListenMessages';
 import { useSession } from 'next-auth/react';
-
+import useChatScroll from '@/app/hooks/useChatScroll';
+import Messages from './Messages';
 
 
 
 const ChatWindow = () => {
-  const {loading, conversation}  = useGetConversation()
-  const session= useSession();
+  
 
   
   useListenMessages();
 
 
   
- 
+  
   const {selectedConversation, setMessages, messages} = useConversation();
 
   
@@ -35,7 +36,7 @@ const ChatWindow = () => {
       const message = await axios.put(`/api/messages/send/${selectedConversation?.username}`, {message: newMessage})
       const sent = message.data as MessageType
       
-      setMessages([...messages, {senderId: sent.senderId, body:sent.body, id:sent.id}])
+      setMessages([...messages, sent])
       
 
     }
@@ -45,42 +46,20 @@ const ChatWindow = () => {
   };
 
 
-  if(loading && selectedConversation){
-    return(
-      <div className='w-3/4 h-screen justify-center items-center bg-white p-4 flex flex-col'>loading...</div>
-    )
-  }
+
   
   
 
   return (
     <div className='w-3/4 h-full bg-white p-4 flex flex-col'>
-      {!selectedConversation|| loading? (<NoChatSelected/>): (
+      {!selectedConversation? (<NoChatSelected/>): (
         <div className="w-3/4 h-[calc(100vh-220px)] bg-white p-4 flex flex-col">
-        <div className="flex-1 h-screen overflow-y-auto w-full mb-4">
-          <h2 className="text-xl font-semibold mb-2">{`Chat with ${selectedConversation.username}`}</h2>
-          <div className="space-y-2">
-            {conversation?.map((message: MessageType) => (
-              <div key={String(message.id)} >
-                {message.senderId === session.data?.user.username || message.senderId === selectedConversation.username &&
-                  <div className={`p-2 bg-gray-100 rounded-md`}>
-                    <p className="font-semibold">{message.senderId===session.data?.user.username?"Me": message.senderId}:</p>
-                    <p>{message.body}</p>
-                  </div>                
-                }
-              </div>
-            ))}
+        
 
-            {messages?.map((message:MessageType)=>(
-            <div key={String(message.id)} className={`p-2 flex bg-gray-100 rounded-md`}>
-              <div>
-                <p className="font-semibold">{message.senderId===session.data?.user.username?"Me": message.senderId}:</p>
-                <p>{message.body}</p>
-              </div>                
-            </div>
-            ))}
-          </div>
-        </div>
+
+        <Messages/>
+          
+       
         <div className="flex">
           <input
             type="text"
