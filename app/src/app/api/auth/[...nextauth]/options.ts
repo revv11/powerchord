@@ -12,15 +12,16 @@ export const authOptions = {
       CredentialsProvider({
           name: 'Credentials',
           credentials: {
-            username: { label: "Username", type: "text", placeholder: "revv", required: true },
+
+            username: { label: "Username", type: "text", placeholder: "revv"},
             password: { label: "Password", type: "password", required: true }
           },
           // TODO: User credentials type from next-aut
           async authorize(credentials: any) {
             // Do zod validation, OTP validation here
-
-                
-                const existingUser = await db.user.findFirst({
+                let existingUser;
+              
+                existingUser = await db.user.findFirst({
                     where: {
                         username: credentials.username
                     }

@@ -2,7 +2,7 @@
 import { userSchema } from "@/lib/zod"
 import { redirect, usePathname } from "next/navigation"
 import Link from "next/link";
-import { useState } from "react";
+import { useState, MouseEventHandler } from "react";
 import axios from "axios";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -11,11 +11,14 @@ import { useRouter } from "next/navigation";
 
 export default function Auth(){
     const router = useRouter()
+    const [msg, setMsg] = useState();
+    const [err, setErr] = useState<string>();
 
     async function submitlogin(e:any) {
         console.log(fields)
         e.preventDefault()
         try{
+            
             
             const signInData = await signIn('credentials',{
                 redirect:false,
@@ -23,6 +26,11 @@ export default function Auth(){
                 password: fields.password
             
             })
+            console.log(signInData)
+            if(signInData?.error){
+                setErr("Invalid Credentials")
+            }
+
             router.push('/dashboard')
             
 
@@ -36,7 +44,7 @@ export default function Auth(){
 
 
     async function submitsignup(event:any){
-        console.log(fields)
+    
         event.preventDefault()
         try{
             
@@ -49,7 +57,7 @@ export default function Auth(){
         catch(e:any){
             if(e.response?.data)
                 console.log(e.response?.data)
-                alert(e.response?.data.message)
+                setErr(e.response?.data.message)
 
             console.log(e)
         }
@@ -65,6 +73,7 @@ export default function Auth(){
     })
     return(
         <form className="space-y-4 md:space-y-6">
+                    <div className="text-red-700">{err}</div>
                         {isSignup&&
                         <div>
                             <label  className="block mb-2 text-sm font-medium  text-white">Email</label>

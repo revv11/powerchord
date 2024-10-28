@@ -19,6 +19,7 @@ export function middleware(req: NextRequest,) {
   else if(!token && (url.pathname.startsWith('/api/messages') || url.pathname.startsWith('/api/find')) ){
     return NextResponse.json({message: "login to kr pehle"})
   }
+ 
 }
 export const config={
     matcher:[
@@ -26,6 +27,7 @@ export const config={
         "/login",
         "/signup",
         "/api/messages/:path*",
-        "/api/find"
+        "/api/find",
+        
     ]
 }

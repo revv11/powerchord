@@ -16,8 +16,8 @@ export default function Signup(){
             </a>
             <div className="w-full rounded-lg shadow bg-gray-900 md:mt-0 sm:max-w-md xl:p-0 ">
                 <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                    <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                    {isSignup?"Sign up":"Login"} to your account
+                    <h1 className="text-xl font-bold leading-tight tracking-tight md:text-2xl text-white">
+                    {isSignup?"Register":"Login to your account"} 
                     </h1>
                     <Auth/>
                 </div>

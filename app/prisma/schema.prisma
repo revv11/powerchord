@@ -20,6 +20,9 @@ model User{
   password          String
   createdAt         DateTime   @default(now())
   updateAt          DateTime   @updatedAt
+  profilepic        String?    @default("")
+  bio               String?    @default("")
+  name              String?    @default("")
 
   conversationIds   Int[]
   conversations     Conversation[]

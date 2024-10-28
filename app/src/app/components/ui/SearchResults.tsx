@@ -1,13 +1,13 @@
 
 import Link from "next/link"
 
-export default function SearchResults({data}){
+export default function SearchResults({data}:any){
     return(
         <ul>
-            {data.map((data)=>
+            {data.map((data:any)=>
             <div>
                 <Link href={`/${data.username}`}>
-                    <li className="bg-white w-[20rem] text-center text-xl">{data.username}</li>
+                    <li className="bg-white w-[20rem] text-center h-10 text-xl">{data.username}</li>
                     <hr />
                 </Link>
             </div>

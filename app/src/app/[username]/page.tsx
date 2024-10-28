@@ -1,65 +1,72 @@
-
+"use client"
 import Image from 'next/image';
 import demo from "@/../public/images/demo.png"
-import { db } from '@/lib/db';
+import { useGetUser } from '../hooks/useGetUser';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import useConversation from '@/zustand/useConversation';
 
 
-export default async function UserProfile({params}:{params:{
+export default function UserProfile({params}:{params:{
     username:string
 }}) {
-  
-
-  const user = await db.user.findUnique({
-    where:{
-        username: params.username
-    },
-    select:{
-        username:true,
-        createdAt:true,
-        id: true,
-    }
-  })
-  if(user){
-    
+  const session = useSession()
+  const {user, loading} = useGetUser(params.username)
+  if(loading){
+    return(
+      <div>
+        loading..
+      </div>
+    )
+  }
+  else if(user){
+      console.log(user)
       return (
-        <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-          <div className="bg-white shadow-md rounded-lg p-6 max-w-sm w-full">
-            <div className="flex flex-col items-center">
-              <div className="relative w-24 h-24 mb-4">
-                {/* Profile picture */}
-                <Image
-                  src={demo}
-                  alt={`${user?.username}'s profile picture`}
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-full"
-                />
-              </div>
-              {/* Username */}
-              <h2 className="text-xl font-semibold text-gray-800 mb-2">
-                {user?.username}
-              </h2>
-              {/* Member since */}
-              <p className="text-gray-600 mb-4">Member since {user?.createdAt.toString()}</p>
-              {/* Message button */}
-              <Link href="/dashboard">
-                <button  className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
-                  Message
-                </button>
-              </Link>
+        <div className="flex items-center justify-center h-screen bg-gray-100">
+      <div className="max-w-lg w-full p-6 bg-white rounded-lg shadow-lg">
+        <div className="flex justify-between items-center">
+          <div className='flex items-center'>
+
+            {user?.profilepic?
+          <Image alt="" src={user?.profilepic} className='rounded-full h-[4rem] w-[4rem]' width={100} height={100}/>:
+          <Image alt="" src="/images/demo.png" width={100} height={100}/>
+        }
+            <div className="ml-6">
+              <h1 className="text-3xl font-bold">{user.name}</h1>
+              <p className="text-gray-500">@{user.username}</p>
+              <p className="text-sm text-gray-400">Joined: {new Date(user.createdAt).toDateString()}</p>
             </div>
+
           </div>
+          {session.data?.user.username === params.username &&
+            <Link href={`/edit/${params.username}`}>
+              <button className='mt-6 w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-200'>Edit</button>
+            </Link>
+          }
+
         </div>
+        <p className="mt-4 text-gray-700">{user.bio}</p>
+        <button
+          className="mt-6 w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-200"
+          // onClick={() => router.push(`/messages/${username}`)}
+        >
+          Message
+        </button>
+        <button
+          className="mt-6 w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-200"
+          // onClick={() => router.push(`/messages/${username}`)}
+        >
+          Add Friend
+        </button>
+      </div>
+    </div>
       );
 
   }
-  else{
+  else if(!loading && !user)
     return(
         <div>
             not found
         </div>
     )
-  }
+  
 }

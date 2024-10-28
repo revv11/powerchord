@@ -20,7 +20,7 @@ const useConversation = create<ConversationState>((set)=>({
     messages : [],
     setMessages: (messages)=>set({messages: messages}),
     count: 0,
-    setCount: (count)=>set({count: count +2})
+    setCount: (count)=>set({count: count +2}),
 }))
 
 

@@ -22,7 +22,8 @@ export  async function GET(req: NextRequest){
             },
             select:{
                 username: true,
-                id:true
+                id:true,
+                profilepic:true,
             }
         })
         return NextResponse.json({users})

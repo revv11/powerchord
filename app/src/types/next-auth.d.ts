@@ -1,4 +1,5 @@
 import 'next-auth'
+import { DefaultSession } from 'next-auth';
 
 
 declare module 'next-auth' {
@@ -8,10 +9,11 @@ declare module 'next-auth' {
         isAcceptingMessages?:boolean;
         username?: string;
     }
-    interface Session{
+    interface Session extends DefaultSession{
         user:{
             id?: string;
             username?: string
+            email?:string,
         }
     }
 }

@@ -2,6 +2,7 @@
 import { createContext , useState, useEffect, useContext, ReactNode, useRef} from "react";
 import io, {Socket} from "socket.io-client"
 import { useSession } from "next-auth/react";
+import { db } from "@/lib/db";
 
 interface ISocketContext{
     socket: Socket | null;
@@ -29,10 +30,13 @@ export const SocketContextProvider = ({children}: {children: ReactNode})=>{
     const socketRef = useRef<Socket | null>(null)
     const [onlineUsers, setOnlineUsers] = useState<string[]>([]);
     const session = useSession();
-    const username = session.data?.user.username
+    const username = session.data?.user.username;
+
+
 
     useEffect(()=>{
         if(session.status !== "loading" && session.status === "authenticated"){
+
             const socket = io(socketURL, {
                 query: {
                     username
