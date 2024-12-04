@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useGetUser } from '@/app/hooks/useGetUser';
 import axios from 'axios';
 import Image from 'next/image';
+import Dp from '@/app/components/ui/Dp';
 
 
 const EditProfilePage = ({params}:{params:{username:string}}) => {
@@ -88,12 +89,19 @@ const EditProfilePage = ({params}:{params:{username:string}}) => {
         className="w-full max-w-md bg-white p-8 rounded-lg shadow-md"
       >
         <h1 className="text-2xl font-bold mb-6">Edit Profile</h1>
-        {user?.profilepic?
-          <Image alt="" src={user?.profilepic} className='rounded-full h-[4rem] w-[4rem]' width={100} height={100}/>:
-          <Image alt="" src="/images/demo.png" width={100} height={100}/>
+        {!formData.profilePicture?
+        (<div>
+          {user?.profilepic?
+          <Dp url={user.profilepic} size="20"/>:
+          <Dp url={"/images/demo.png"} size="20"/>
+          
         }
+        </div>):
+        (
+          <Dp url={URL.createObjectURL(formData.profilePicture)} size="20"/>
+        )}
+        
         <div className="mb-4">
-          <label className="block text-gray-700">Profile Picture</label>
           <input
             type="file"
             name="profilePicture"

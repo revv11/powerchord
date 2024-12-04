@@ -27,7 +27,7 @@ export const config={
         "/login",
         "/signup",
         "/api/messages/:path*",
-        "/api/find",
+        "/api/find", 
         
     ]
 }

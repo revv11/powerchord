@@ -2,7 +2,7 @@
 import React from 'react';
 import useConversation from '@/zustand/useConversation';
 import { useSocketContext } from '@/app/context/SocketContext';
-import Image from 'next/image';
+import Dp from './Dp';
 
 type User = {
   id: number;
@@ -12,7 +12,6 @@ type User = {
 
 interface SidebarProps {
   users: User[];
-  onSelectUser: (userId: number) => void;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ users }) => {
@@ -22,18 +21,21 @@ const Sidebar: React.FC<SidebarProps> = ({ users }) => {
   
 
   return (
-    <div className="w-1/4 h-[60%] bg-gray-200 p-4">
-      <h2 className="text-xl font-semibold mb-4">Users</h2>
-      <ul>
+    <div className="w-1/4 bg-blue-200 p-4">
+      <div className='p-10 mx-auto bg-white rounded-lg '>
+        <h1 className="text-2xl  text-center font-bold">POWERCHORD</h1>
+      </div>
+      <h2 className="text-xl font-semibold mb-4">Chats</h2>
+      <ul className='felx space-y-2'>
         {users.map((user) => (
           <li
             key={user.id}
             onClick={() => setSelectedConversation({username: user.username, id:user.id, profilepic:user.profilepic})}
-            className="cursor-pointer space-x-4 flex items-center p-2 rounded-md hover:bg-gray-300"
+            className={`cursor-pointer ${selectedConversation?.username === user.username && "bg-blue-300"} space-x-4 flex items-center p-2 rounded-md hover:bg-blue-100`}
           >
             {user.profilepic?
-              <Image alt='' className='w-10 h-10 rounded-full' src={user.profilepic} width={100} height={100}/>:
-              <Image alt='' className='w-10 h-10 rounded-full' src="/images/demo.png" width={100} height={100}/>
+              <Dp url={user.profilepic} size="10"/>:
+              <Dp url={"/images/demo.png"} size="10"/>
             }
             <div>
 

@@ -4,6 +4,7 @@ import demo from "@/../public/images/demo.png"
 import { useGetUser } from '../hooks/useGetUser';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
+import Appbar from '../components/ui/Appbar';
 
 
 export default function UserProfile({params}:{params:{
@@ -21,7 +22,10 @@ export default function UserProfile({params}:{params:{
   else if(user){
       console.log(user)
       return (
-        <div className="flex items-center justify-center h-screen bg-gray-100">
+        <div className="">
+          <Appbar/>
+          <div className='flex items-center justify-center h-[calc(100vh-110px)] bg-gray-100'>
+
       <div className="max-w-lg w-full p-6 bg-white rounded-lg shadow-lg">
         <div className="flex justify-between items-center">
           <div className='flex items-center'>
@@ -58,6 +62,7 @@ export default function UserProfile({params}:{params:{
           Add Friend
         </button>
       </div>
+          </div>
     </div>
       );
 

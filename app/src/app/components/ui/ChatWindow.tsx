@@ -3,10 +3,7 @@ import React, { useEffect, useState } from 'react';
 import useConversation from '@/zustand/useConversation';
 import NoChatSelected from './NoChatSelected';
 import axios from 'axios';
-import { useGetConversation } from '@/app/hooks/useGetConversation';
 import useListenMessages from '@/app/hooks/useListenMessages';
-import { useSession } from 'next-auth/react';
-import useChatScroll from '@/app/hooks/useChatScroll';
 import Messages from './Messages';
 
 
@@ -51,16 +48,16 @@ const ChatWindow = () => {
   
 
   return (
-    <div className='w-3/4 h-full bg-white p-4 flex flex-col'>
+    <div className='w-3/4 h-full mx-auto backdrop:blur-xl p-4 flex flex-col'>
       {!selectedConversation? (<NoChatSelected/>): (
-        <div className="w-3/4 h-[calc(100vh-220px)] bg-white p-4 flex flex-col">
+        <div className=" h-[calc(100vh-400px)]  p-4 flex flex-col">
         
 
 
         <Messages/>
           
        
-        <div className="flex">
+        <form className="flex">
           <input
             type="text"
             value={newMessage}
@@ -74,7 +71,7 @@ const ChatWindow = () => {
           >
             Send
           </button>
-        </div>
+        </form>
       </div>
       ) }
       

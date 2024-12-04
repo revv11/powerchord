@@ -2,7 +2,6 @@
 import { createContext , useState, useEffect, useContext, ReactNode, useRef} from "react";
 import io, {Socket} from "socket.io-client"
 import { useSession } from "next-auth/react";
-import { db } from "@/lib/db";
 
 interface ISocketContext{
     socket: Socket | null;
