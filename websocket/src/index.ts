@@ -1,8 +1,8 @@
-import { PrismaClient } from "@prisma/client"
+
 import { app, getReceiverSocketId, server, io } from "./socket/socket";
 import cors from "cors";
 
-const prisma  = new PrismaClient();
+
 
 
 server.listen(4000, ()=>{

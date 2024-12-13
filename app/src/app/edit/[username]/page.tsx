@@ -1,10 +1,8 @@
-// pages/profile/edit.js
+
 "use client"
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { useGetUser } from '@/app/hooks/useGetUser';
 import axios from 'axios';
-import Image from 'next/image';
 import Dp from '@/app/components/ui/Dp';
 
 

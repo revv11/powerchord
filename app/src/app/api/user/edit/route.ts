@@ -10,6 +10,7 @@ export async function PUT(req:NextRequest){
     try{
         const session = await getServerSession();
         const email = session?.user.email;
+    
         let path = "";
         const data = await req.formData();
         const file = data.get('file') as any;

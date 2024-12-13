@@ -8,7 +8,7 @@ export default function ChatPage() {
 
 
     
-        // setSelectedUser(users[0].username)
+
         
        
         return (

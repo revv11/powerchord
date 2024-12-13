@@ -12,10 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const client_1 = require("@prisma/client");
 const socket_1 = require("./socket/socket");
 const cors_1 = __importDefault(require("cors"));
-const prisma = new client_1.PrismaClient();
 socket_1.server.listen(4000, () => {
     console.log("listening on 4000");
 });

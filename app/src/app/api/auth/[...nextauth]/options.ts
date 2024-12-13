@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 import CredentialsProvider from "next-auth/providers/credentials"
 import bcrypt from "bcryptjs";
-import { userSchema } from "@/lib/zod";
+
 
 
 
@@ -33,7 +33,10 @@ export const authOptions = {
                         return {
                             id: existingUser.id.toString(),
                             username: existingUser.username,
-                            email: existingUser.email
+                            email: existingUser.email,
+                            name: existingUser.name,
+                            profilepic: existingUser.profilepic,
+                            isVerified: existingUser.isVerified
                         }
                     }
                     return null
@@ -51,9 +54,12 @@ export const authOptions = {
     callbacks: {
         async jwt({token , user}: {token: any, user:any}){
             if(user){
-                token.id = user.id?.toString();
+                token.id = user.id?.toString(),
                 token.isVerified = user.isVerified;
                 token.username = user.username;
+                token.name = user.name;
+                token.profilepic= user.profilepic;
+
             }
             return token;
         },
@@ -63,6 +69,8 @@ export const authOptions = {
                 session.user.id = token.id;
                 session.user.isVerified = token.isVerified;
                 session.user.username = token.username;
+                session.user.name = token.name;
+                session.user.profilepic = token.profilepic;
 
             }
 

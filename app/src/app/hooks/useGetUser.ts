@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useSession } from "next-auth/react";
+
 
 
 export interface User{
@@ -14,7 +14,7 @@ export interface User{
 }
 export const useGetUser  = (username:string) =>{
 
-    const DefaultUser = useSession();
+
     const [loading, setLoading] = useState(true)
     const [user , setUser] = useState<User>();
 

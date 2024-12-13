@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db";
 import { getToken } from "next-auth/jwt";
 import axios from "axios";
-import { error } from "console";
+
 
 
 export async function PUT(req: NextRequest, {params}: {params: {id: string}}){
@@ -58,8 +58,8 @@ export async function PUT(req: NextRequest, {params}: {params: {id: string}}){
                 })
             }
 
-            const response = await axios.post(`http://localhost:4000/send/${receiver}`, {message: message.message, sender, id: newMessage.id})
-            console.log("websocket called")
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/send/${receiver}`, {message: message.message, sender, id: newMessage.id})
+            
             console.log(response.data)
 
             return NextResponse.json(newMessage)

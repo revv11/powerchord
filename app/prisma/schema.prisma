@@ -23,6 +23,7 @@ model User{
   profilepic        String?    @default("")
   bio               String?    @default("")
   name              String?    @default("")
+  isVerified        Boolean    @default(false)
 
   conversationIds   Int[]
   conversations     Conversation[]

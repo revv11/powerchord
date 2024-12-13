@@ -1,18 +1,18 @@
 "use client"
-import { userSchema } from "@/lib/zod"
-import { redirect, usePathname } from "next/navigation"
+import {  usePathname } from "next/navigation"
 import Link from "next/link";
-import { useState, MouseEventHandler } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useUserContext } from "@/app/context/UserContext";
 
 
 
 export default function Auth(){
     const router = useRouter()
-    const [msg, setMsg] = useState();
     const [err, setErr] = useState<string>();
+ 
 
     async function submitlogin(e:any) {
         console.log(fields)
@@ -50,7 +50,8 @@ export default function Auth(){
             
             const response = await axios.post('/api/user' , {username: fields.username, email: fields.email, password: fields.password})
             const data =  await response.data;
-            router.push('/login')
+            
+            router.push('/verifyemail')
           
 
         }

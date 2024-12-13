@@ -6,12 +6,18 @@ import useConversation from "@/zustand/useConversation";
 
 const useListenMessages = () =>{
     const { socket }  = useSocketContext();
-    const {messages, setMessages} = useConversation();
+    const {messages, setMessages, selectedConversation, setnewMessages, newmessages} = useConversation();
 
 
     useEffect(()=>{
         socket?.on("newMessage", (newMessages: MessageType)=>{
-           setMessages([...messages, newMessages])
+            if(newMessages.senderId!=selectedConversation?.username){
+                setnewMessages([...newmessages, newMessages])
+            }
+            else{
+
+                setMessages([...messages, newMessages])
+            }
            
 
         })

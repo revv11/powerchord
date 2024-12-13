@@ -14,13 +14,6 @@ export default function RootLayout({
     children
 }:childrenType){
 
-    // const session = useSession()
-    // const router = useRouter();
-    // useEffect(()=>{
-    //     if(session?.status==='authenticated'){
-    //         router.push('/dashboard')
-    //     }
-    // },[session])
 
     return(
         <div>

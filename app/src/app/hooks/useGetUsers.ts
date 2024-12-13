@@ -10,7 +10,7 @@ export const useGetUsers  = () =>{
     const [users , setUsers] = useState<User[]>([]);
 
     useEffect(()=>{
-        axios.get(`http://localhost:3000/api/messages/get/users`,{
+        axios.get(`/api/messages/get/users`,{
         })
             .then(response => {
                 setUsers(response.data.users);

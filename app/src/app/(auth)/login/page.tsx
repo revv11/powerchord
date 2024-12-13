@@ -1,5 +1,5 @@
 
-import Image from "next/image"
+
 import Auth from "@/app/components/ui/Auth"
 
 export default function Login(){

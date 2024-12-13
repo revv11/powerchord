@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react"
 import useChatScroll from "@/app/hooks/useChatScroll";
 import { useGetConversation } from "@/app/hooks/useGetConversation";
 import useConversation from "@/zustand/useConversation";
-import Image from "next/image";
+
 
 
 

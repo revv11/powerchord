@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import bcrypt from "bcryptjs"
 import { userSchema } from "@/lib/zod";
+import { sendEmail } from "@/lib/verification/mailer";
 
 
 
@@ -23,6 +24,7 @@ export async function POST(req: Request){
             return NextResponse.json({user: null , message: "Username already exists"},{status:409})
         }
         //creating user
+        await sendEmail({email, userId: username})
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = await db.user.create({
             data : {email: email || "", username, password: hashedPassword }

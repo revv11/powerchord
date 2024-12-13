@@ -22,6 +22,7 @@ export async function GET(req:NextRequest, {params}: {params: {username: string}
             id: true,
             bio:true,
             name:true,
+            email:true,
             
             
             

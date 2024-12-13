@@ -1,6 +1,5 @@
 "use client"
 import Image from 'next/image';
-import demo from "@/../public/images/demo.png"
 import { useGetUser } from '../hooks/useGetUser';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';

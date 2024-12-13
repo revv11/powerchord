@@ -16,7 +16,7 @@ export const useGetConversation = ()=>{
                 return null
             }
             try{
-                const res = await axios.get(`http://localhost:3000/api/messages/get/${selectedConversation?.username}`)
+                const res = await axios.get(`/api/messages/get/${selectedConversation?.username}`)
                 
                 
                 setMessages(res.data.messages)

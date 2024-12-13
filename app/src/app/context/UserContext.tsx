@@ -1,13 +1,14 @@
 "use client"
 import { createContext , useState, useEffect, useContext, ReactNode, useRef} from "react";
 import { useSession } from "next-auth/react";
-import { db } from "@/lib/db";
 import axios from "axios";
 
 interface User{
     id?:number,
     profilepic?: string | null,
     name?: string | null,
+    email?: string | null,
+    username?: string | null,
 }
 
 
@@ -25,12 +26,15 @@ export const useUserContext = (): User=>{
 export const UserContextProvider = ({children}: {children: ReactNode})=>{
     const session   = useSession()
     const user = session.data?.user;
-    const [currentUser, SetCurrentUser] = useState<User>({id:Number(user?.id) })
+    
+    
+    
+    const [currentUser, setCurrentUser] = useState<User | any>({id:Number(user?.id) })
     useEffect(()=>{
         async function setuser(){
             const existinguser = await axios.get(`/api/${user?.username}`)
             const data = existinguser.data.user
-            SetCurrentUser({id:data?.id, name: data?.name, profilepic: data?.profilepic})
+            setCurrentUser({id:data?.id, name: data?.name, profilepic: data?.profilepic})
         }
         setuser();
     },[session.data?.user])

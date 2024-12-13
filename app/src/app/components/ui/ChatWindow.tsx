@@ -48,7 +48,7 @@ const ChatWindow = () => {
   
 
   return (
-    <div className='w-3/4 h-full mx-auto backdrop:blur-xl p-4 flex flex-col'>
+    <div className='w-[75%] h-full mx-auto backdrop:blur-xl p-4 flex flex-col'>
       {!selectedConversation? (<NoChatSelected/>): (
         <div className=" h-[calc(100vh-400px)]  p-4 flex flex-col">
         

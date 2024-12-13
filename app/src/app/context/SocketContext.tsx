@@ -2,6 +2,7 @@
 import { createContext , useState, useEffect, useContext, ReactNode, useRef} from "react";
 import io, {Socket} from "socket.io-client"
 import { useSession } from "next-auth/react";
+import React from 'react';
 
 interface ISocketContext{
     socket: Socket | null;
@@ -12,7 +13,7 @@ interface ISocketContext{
 
 
 
-const socketURL = "http://localhost:4000"
+const socketURL = process.env.NEXT_PUBLIC_API_URL
 
 const SocketContext = createContext<ISocketContext | undefined>(undefined)
 
