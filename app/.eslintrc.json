@@ -1,11 +1,7 @@
 {
   "extends": ["next/core-web-vitals", "next/typescript"],
-  "overrides": [
-    {
-      "files": ["*.test.ts", "migrations/*.ts"],
-      "rules": {
-        "@typescript-eslint/no-explicit-any": "off"
-      }
-    }
-  ]
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off"
+  }
+  
 }
