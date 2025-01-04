@@ -25,7 +25,7 @@ export default function Verify({params}:{params: {
                 if(decoded!= undefined){
                 
                     setPayload(String(decoded))
-                    const response = await axios.get(`/api/verify/${decoded}`)
+                    await axios.get(`/api/verify/${decoded}`)
                     setStatus("VERIFIED")
                     setTimeout(()=>{
                         router.push('/login')

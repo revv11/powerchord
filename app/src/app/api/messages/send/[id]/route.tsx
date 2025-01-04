@@ -10,7 +10,7 @@ export async function PUT(req: NextRequest, {params}: {params: {id: string}}){
         const message = await req.json();
         
         const token = await getToken({req})
-        let sender = String(token?.username);
+        const sender = String(token?.username);
         const receiver = params.id;
       
   

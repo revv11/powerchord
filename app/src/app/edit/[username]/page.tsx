@@ -58,7 +58,7 @@ const EditProfilePage = ({params}:{params:{username:string}}) => {
         formDataToSubmit.append("file", formData.profilePicture);
         
       }
-      const res = await axios.put("/api/user/edit",formDataToSubmit)
+      await axios.put("/api/user/edit",formDataToSubmit)
       
 
     }

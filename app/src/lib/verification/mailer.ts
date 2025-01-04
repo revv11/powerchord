@@ -2,7 +2,7 @@ import nodemailer from "nodemailer"
 import jwt from "jsonwebtoken"
 
 // Looking to send emails in production? Check out our Email API/SMTP product!
-var transporter = nodemailer.createTransport({
+const transporter = nodemailer.createTransport({
     service: "gmail",
     host: "smtp.gmail.com",
     port: 465,
@@ -16,7 +16,7 @@ var transporter = nodemailer.createTransport({
 export const sendEmail = async ({email, userId}:any)=>{
     try{
         const hashedToken = jwt.sign(userId, process.env.NEXT_PUBLIC_NEXTAUTH_SECRET || "test")
-        const info = await transporter.sendMail({
+        await transporter.sendMail({
             from: '"verify👻" <anand.utkarsh18@gmail.com>', // sender address
             to: email, // list of receivers
             subject: "VERIFY", // Subject line

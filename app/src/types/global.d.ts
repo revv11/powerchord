@@ -1,11 +1,11 @@
 type ConversationType = {
-    id: Number;
+    id: number;
     username: string;
     profilepic?: string;
 }
 
 type MessageType = {
-    id? : Number;
+    id? : number;
     body : string;
     senderId: string,
 }

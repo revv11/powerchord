@@ -9,7 +9,7 @@ import { getToken } from "next-auth/jwt";
 export async function middleware(req: NextRequest,) {
   // Access cookies from the request
     const secret = process.env.NEXT_PUBLIC_NEXTAUTH_SECRET;
-    const token = req.cookies.get('next-auth.session-token'); 
+    
     const token2 = await getToken({ req, secret });
     console.log(token2?.isVerified)
     

@@ -1,4 +1,4 @@
-import { NextApiRequest } from "next";
+
 import { db } from "@/lib/db";
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";

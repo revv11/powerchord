@@ -15,7 +15,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ users }) => {
-  const {setSelectedConversation, selectedConversation, newmessages} = useConversation()
+  const {setSelectedConversation, selectedConversation} = useConversation()
   const {onlineUsers} = useSocketContext();
   
   

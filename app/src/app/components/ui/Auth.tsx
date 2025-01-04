@@ -49,7 +49,7 @@ export default function Auth(){
         try{
             
             const response = await axios.post('/api/user' , {username: fields.username, email: fields.email, password: fields.password})
-            const data =  await response.data;
+            
             
             router.push('/verifyemail')
           
