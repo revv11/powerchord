@@ -17,11 +17,13 @@ export default function Appbar(){
     const username  = session.data?.user?.username
     
     return(
-    <div className="bg-gray-900  shadow-xl flex items-center h-[110px] p-5 px-10 justify-between">
-        <h1 className="text-2xl w-[30%] font-semibold"></h1>
+    <div className=" bg-[#0E0D1D] shadow-xl rounded-lg flex items-center h-[130px] p-5 px-10 justify-between">
+        <Link href="/dashboard" className="w-[30%]">
+            <h1 className="text-2xl  font-semibold text-white">POWERCHORD</h1>
+        </Link>
         <div className="flex w-[30%] flex-col items-center">
             <div><Searchbar setData={setData}/></div>
-            <div className="absolute top-20"><SearchResults data={data}/></div>
+            <div className="absolute top-[8rem]"><SearchResults data={data}/></div>
         </div>
         <div className="flex w-[30%] justify-end items-center space-x-10">
             {profilepic?

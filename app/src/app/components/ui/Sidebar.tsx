@@ -21,10 +21,7 @@ const Sidebar: React.FC<SidebarProps> = ({ users }) => {
   
 
   return (
-    <div className="w-full h-full bg-gray-900 p-4">
-      <div className='p-10 mx-auto bg-black rounded-lg '>
-        <h1 className="text-2xl text-white  text-center font-bold">POWERCHORD</h1>
-      </div>
+    <div className="w-full h-full rounded-lg bg-[#0E0D1D] p-4">
       <h2 className="text-xl font-semibold my-10 text-white mb-4">Chats</h2>
       <ul className='space-y-2'>
         {users.map((user) => (

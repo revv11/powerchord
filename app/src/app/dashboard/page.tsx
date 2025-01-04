@@ -14,7 +14,7 @@ export default function ChatPage() {
         return (
       
       
-          <div className="flex h-[calc(100vh-150px)]">
+          <div className="flex h-full">
            
             <ChatWindow />
           </div>

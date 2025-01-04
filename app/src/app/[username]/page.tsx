@@ -21,11 +21,11 @@ export default function UserProfile({params}:{params:{
   else if(user){
       console.log(user)
       return (
-        <div className="">
+        <div className="bg-[#020210]">
           <Appbar/>
-          <div className='flex items-center justify-center h-[calc(100vh-110px)] bg-gray-100'>
+          <div className='flex items-center justify-center h-[calc(100vh-110px)] '>
 
-      <div className="max-w-lg w-full p-6 bg-white rounded-lg shadow-lg">
+      <div className="max-w-lg w-full p-6 shadow-xl border border-gray-700 bg-transparent backdrop-blur-2xl rounded-lg">
         <div className="flex justify-between items-center">
           <div className='flex items-center'>
 
@@ -33,9 +33,9 @@ export default function UserProfile({params}:{params:{
           <Image alt="" src={user?.profilepic} className='rounded-full h-[4rem] w-[4rem]' width={100} height={100}/>:
           <Image alt="" src="/images/demo.png" width={100} height={100}/>
         }
-            <div className="ml-6">
+            <div className="ml-6 text-white">
               <h1 className="text-3xl font-bold">{user.name}</h1>
-              <p className="text-gray-500">@{user.username}</p>
+              <p className="text-white">@{user.username}</p>
               <p className="text-sm text-gray-400">Joined: {new Date(user.createdAt).toDateString()}</p>
             </div>
 

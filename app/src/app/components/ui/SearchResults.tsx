@@ -3,7 +3,7 @@ import Link from "next/link"
 
 export default function SearchResults({data}:any){
     return(
-        <ul className=" bg-white shadow-2xl border border-solid border-slate-400 rounded-md">
+        <ul className=" bg-white shadow-2xl rounded-md">
             {data.map((data:any)=>
             <div className="">
                 <Link href={`/${data.username}`}>

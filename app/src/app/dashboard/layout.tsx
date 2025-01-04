@@ -20,16 +20,20 @@ export default function UserLayout({
         
     }
     return(
-        <div className="h-screen  flex">
-            <div className="h-full xl:w-[400px] w-[250px]">
-                <Sidebar users={users} />
-            </div>
-            <div className="bg-cover w-[calc(100%-250px)] xl:w-[calc(100%-400px)] bg-center h-screen"
-                style={{
-                    backgroundImage: "url('/images/bg1.jpg')",
-                }}>
+        <div className="bg-[#020210] p-6 h-full">
+            <div className=" mb-6 rounded-lg">
                 <Appbar/>
-                {children}
+            </div>
+            <div className="flex h-[calc(100%-150px)]">
+                <div className="mr-6 w-[314px] ">
+                    <Sidebar users={users} />
+                </div>
+                <div className=" w-full rounded-lg"
+                   >
+                    
+                    {children}
+                </div>
+
             </div>
 
         </div>
