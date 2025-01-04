@@ -15,7 +15,7 @@ const transporter = nodemailer.createTransport({
 
 export const sendEmail = async ({email, userId}:any)=>{
     try{
-        const hashedToken = jwt.sign(userId, process.env.NEXT_PUBLIC_NEXTAUTH_SECRET || "test")
+        const hashedToken = jwt.sign(userId, process.env.NEXTAUTH_SECRET || "test")
         await transporter.sendMail({
             from: '"verify👻" <anand.utkarsh18@gmail.com>', // sender address
             to: email, // list of receivers
@@ -23,7 +23,7 @@ export const sendEmail = async ({email, userId}:any)=>{
             // text: hashedToken, // plain text body
             html: `
               <h1>CLICK 
-              <a href=${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/verify/${hashedToken}>HERE</a>
+              <a href=${process.env.FRONTEND_URL}/verify/${hashedToken}>HERE</a>
               THE LINK TO VERIFY EMAIL</h1>
               `, // html body
           });
