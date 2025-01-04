@@ -30,5 +30,6 @@ export  async function GET(req: NextRequest){
     }
     catch(e){
         console.log(e)
+        return NextResponse.json({error:e})
     }
 }

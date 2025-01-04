@@ -59,7 +59,7 @@ export const authOptions = {
                 token.username = user.username;
                 token.name = user.name;
                 token.profilepic= user.profilepic;
-
+                
             }
             return token;
         },
@@ -71,7 +71,7 @@ export const authOptions = {
                 session.user.username = token.username;
                 session.user.name = token.name;
                 session.user.profilepic = token.profilepic;
-
+                
             }
 
             return session
