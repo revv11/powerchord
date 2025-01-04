@@ -19,9 +19,9 @@ export const authOptions = {
           // TODO: User credentials type from next-aut
           async authorize(credentials: any) {
             // Do zod validation, OTP validation here
-                let existingUser;
+                
               
-                existingUser = await db.user.findFirst({
+                const existingUser = await db.user.findFirst({
                     where: {
                         username: credentials.username
                     }
@@ -54,7 +54,7 @@ export const authOptions = {
     callbacks: {
         async jwt({token , user}: {token: any, user:any}){
             if(user){
-                token.id = user.id?.toString(),
+                token.id = user.id.toString(),
                 token.isVerified = user.isVerified;
                 token.username = user.username;
                 token.name = user.name;
