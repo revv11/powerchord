@@ -7,7 +7,7 @@ export async function GET(req: NextRequest, {params}: {params:{id:string}}){
     try{
         const receiver = params.id;
         const token = await getToken({req})
-        const sender   = String(token?.username);
+        const sender = String(token?.username);
         
 
         const conversation = await db.conversation.findFirst({

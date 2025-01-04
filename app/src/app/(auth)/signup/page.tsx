@@ -1,5 +1,5 @@
 "use client"
-import Image from "next/image"
+
 import Auth from "@/app/components/ui/Auth"
 import { usePathname } from "next/navigation"
 
