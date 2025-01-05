@@ -17,7 +17,7 @@ export const sendEmail = async ({email, userId}:any)=>{
     try{
         const hashedToken = jwt.sign(userId, process.env.NEXTAUTH_SECRET || "test")
         await transporter.sendMail({
-            from: '"verify👻" <anand.utkarsh18@gmail.com>', // sender address
+            from: '"POWERCHORD"<anand.utkarsh18@gmail.com>', // sender address
             to: email, // list of receivers
             subject: "VERIFY", // Subject line
             // text: hashedToken, // plain text body

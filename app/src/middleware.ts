@@ -11,7 +11,7 @@ export async function middleware(req: NextRequest,) {
     const secret = process.env.NEXT_PUBLIC_NEXTAUTH_SECRET;
     
     const token2 = await getToken({ req, secret });
-    console.log(token2?.isVerified)
+    
     
     
     
