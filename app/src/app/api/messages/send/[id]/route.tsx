@@ -58,7 +58,7 @@ export async function PUT(req: NextRequest, {params}: {params: {id: string}}){
                 })
             }
 
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/send/${receiver}`, {message: message.message, sender, id: newMessage.id})
+            const response = await axios.post(`${process.env.BACKEND_URL}/send/${receiver}`, {message: message.message, sender, id: newMessage.id})
             
             console.log(response.data)
 
