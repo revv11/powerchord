@@ -10,7 +10,7 @@ server.listen(4000, ()=>{
 })
 
 
-const allowedOrigin = 'http://localhost:3000'; // Replace with the server's IP address or domain
+const allowedOrigin = process.env.FRONTEND_URL; // Replace with the server's IP address or domain
 
 // CORS options
 const corsOptions = {

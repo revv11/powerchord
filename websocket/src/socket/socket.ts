@@ -1,18 +1,20 @@
 import { Server } from "socket.io";
 import http from "http";
 import express from "express"
+import dotenv from "dotenv"
 
 
 
 const app = express();
-
+dotenv.config()
 app.use(express.json())
 
+const frontendurl = process.env.FRONTEND_URL
 
 const server = http.createServer(app);
 const io = new Server(server,{
     cors: {
-        origin: ["http://localhost:3000"],
+        origin: [`${frontendurl}`],
         methods: ["GET", "POST"],
     }
 });

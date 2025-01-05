@@ -7,14 +7,17 @@ exports.server = exports.io = exports.app = exports.getReceiverSocketId = void 0
 const socket_io_1 = require("socket.io");
 const http_1 = __importDefault(require("http"));
 const express_1 = __importDefault(require("express"));
+const dotenv_1 = __importDefault(require("dotenv"));
 const app = (0, express_1.default)();
 exports.app = app;
+dotenv_1.default.config();
 app.use(express_1.default.json());
+const frontendurl = process.env.FRONTEND_URL;
 const server = http_1.default.createServer(app);
 exports.server = server;
 const io = new socket_io_1.Server(server, {
     cors: {
-        origin: ["http://localhost:3000"],
+        origin: [`${frontendurl}`],
         methods: ["GET", "POST"],
     }
 });
