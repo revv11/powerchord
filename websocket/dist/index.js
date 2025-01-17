@@ -17,7 +17,7 @@ const cors_1 = __importDefault(require("cors"));
 socket_1.server.listen(4000, () => {
     console.log("listening on 4000");
 });
-const allowedOrigin = 'http://localhost:3000'; // Replace with the server's IP address or domain
+const allowedOrigin = process.env.FRONTEND_URL; // Replace with the server's IP address or domain
 // CORS options
 const corsOptions = {
     origin: allowedOrigin, // Allow requests only from this IP address or domain
@@ -33,13 +33,29 @@ socket_1.app.get("/", (req, res) => {
 socket_1.app.post("/send/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const reciever = req.params.id;
-        console.log(req.body);
-        const { message, sender, id } = req.body;
         // console.log(sender , message )
         const receiverSocketId = (0, socket_1.getReceiverSocketId)(reciever);
         console.log({ receiverSocketId });
-        socket_1.io.to(receiverSocketId).emit("newMessage", { senderId: sender, body: message, id });
-        res.json({ id });
+        socket_1.io.to(receiverSocketId).emit("newMessage", req.body);
+        res.json(req.body);
+    }
+    catch (e) {
+        console.log(e);
+        res.json({ error: e });
+    }
+}));
+// receiverId: 'sebastian',
+//   createdAt: 2025-01-14T18:04:47.682Z,
+//   sender: { username: 'revv11', profilepic: '' }
+socket_1.app.post("/request/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const reciever = req.params.id;
+        console.log(req.body);
+        // console.log(sender , message )
+        const receiverSocketId = (0, socket_1.getReceiverSocketId)(reciever);
+        console.log({ receiverSocketId });
+        socket_1.io.to(receiverSocketId).emit("newRequest", req.body);
+        res.json(req.body);
     }
     catch (e) {
         console.log(e);

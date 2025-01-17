@@ -6,20 +6,27 @@ import {FaSearch} from "react-icons/fa"
 export default function Searchbar({setData}:any){
     
     const [value, setValue]  = useState("")
-
+    const [res , setRes] = useState<any[]>()
+    useEffect(()=>{
+        fetch("/api/find")
+            .then((response)=>response.json())
+            .then((json)=>{
+                setRes(json)
+            })
+    },[])
     
     
     useEffect(()=>{
         
     
-            fetch("/api/find")
-               .then((response)=> response.json())
-               .then((json)=>{
-                   const results = json.filter((user:any)=>{
-                       return value && user && user.username && user.username.toLowerCase().includes(value);
-                   }) 
-                   setData(results)
-               })
+        if(res){
+            const results = res.filter((user:any)=>{
+                return value && user && user.username && user.username.toLowerCase().includes(value);
+            }) 
+            setData(results)
+
+        }   
+              
                
        
            

@@ -1,26 +1,26 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import useConversation from "@/zustand/useConversation";
 
-export interface User{
-    id: number;
-    username:string
-}
+
 export const useGetUsers  = () =>{
     const [loading, setLoading] = useState(true)
-    const [users , setUsers] = useState<User[]>([]);
-
+    const {friends, setFriends} = useConversation()
     useEffect(()=>{
         axios.get(`/api/messages/get/users`,{
         })
             .then(response => {
-                setUsers(response.data.users);
+                
+                setFriends(response.data.users)
+              
+           
                 setLoading(false)
             })
     },[])
 
     return(
         {
-            loading,users
+            loading,friends
         }
     )
     

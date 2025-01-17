@@ -13,6 +13,7 @@ const useListenMessages = () =>{
         socket?.on("newMessage", (newMessages: MessageType)=>{
             if(newMessages.senderId!=selectedConversation?.username){
                 setnewMessages([...newmessages, newMessages])
+                console.log(newMessages)
             }
             else{
 

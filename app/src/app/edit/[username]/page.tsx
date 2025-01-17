@@ -4,12 +4,20 @@ import { useState, useEffect } from 'react';
 import { useGetUser } from '@/app/hooks/useGetUser';
 import axios from 'axios';
 import Dp from '@/app/components/ui/Dp';
+import Spinner from '@/app/components/ui/Spinner';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 
 const EditProfilePage = ({params}:{params:{username:string}}) => {
-
+  const router = useRouter();
   const username = params.username;
   const {loading, user} = useGetUser(username)
+  const [load , setLoad] = useState(false);
+  const session = useSession();
+  if(session.data?.user.username !== username){
+    router.push(`/edit/${session.data?.user.username}`)
+  }
   
   
   const [formData, setFormData] = useState({
@@ -43,7 +51,7 @@ const EditProfilePage = ({params}:{params:{username:string}}) => {
       ...formData,
       profilePicture: e.target.files[0],
     });
-    console.log(formData)
+    
   };
 
   const handleSubmit = async (e:any) => {
@@ -51,6 +59,7 @@ const EditProfilePage = ({params}:{params:{username:string}}) => {
 
     // You would typically upload the form data to your API here.
     try{
+      setLoad(true)
       const formDataToSubmit = new FormData();
       formDataToSubmit.append("name", formData.name || "");
       formDataToSubmit.append("bio", formData.bio || "");
@@ -59,10 +68,11 @@ const EditProfilePage = ({params}:{params:{username:string}}) => {
         
       }
       await axios.put("/api/user/edit",formDataToSubmit)
-      
+      setLoad(false)
 
     }
     catch(e){
+      setLoad(false)
       console.log(e);
     }
 
@@ -73,12 +83,14 @@ const EditProfilePage = ({params}:{params:{username:string}}) => {
 
   if(loading){
     return(
-      <div className='flex items-center justify-center min-h-screen bg-gray-100'>Loading...</div>
+      <div className='flex items-center justify-center min-h-screen bg-gray-100'>
+        <Spinner size="8"/>
+      </div>
     )
   }
 
  
-  console.log(user)
+
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -134,9 +146,10 @@ const EditProfilePage = ({params}:{params:{username:string}}) => {
 
         <button
           type="submit"
-          className="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-200"
+          className="w-full py-2 px-4 bg-blue-500 flex items-center justify-center text-white font-semibold rounded-md hover:bg-blue-600 transition duration-200"
         >
-          Save Changes
+          
+          {load? <Spinner size="6"/>: "Save Changes"}
         </button>
       </form>
     </div>

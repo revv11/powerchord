@@ -1,4 +1,5 @@
 
+import { send } from "process";
 import { app, getReceiverSocketId, server, io } from "./socket/socket";
 import cors from "cors";
 
@@ -30,14 +31,39 @@ app.get("/", (req,res)=>{
 app.post("/send/:id", async (req,res)=>{
     try{
         const reciever = req.params.id;
-        console.log(req.body);
-        const {message, sender, id} = req.body;
+       
 
         // console.log(sender , message )
         const receiverSocketId = getReceiverSocketId(reciever)
         console.log({receiverSocketId})
-        io.to(receiverSocketId).emit("newMessage", {senderId: sender, body: message, id })
-        res.json({id})
+        io.to(receiverSocketId).emit("newMessage", req.body)
+        res.json(req.body)
+
+    }
+    catch(e){
+        console.log(e)
+        res.json({error: e})
+    }
+
+
+})
+
+// receiverId: 'sebastian',
+//   createdAt: 2025-01-14T18:04:47.682Z,
+//   sender: { username: 'revv11', profilepic: '' }
+
+
+app.post("/request/:id", async (req,res)=>{
+    try{
+        const reciever = req.params.id;
+        console.log(req.body);
+        
+
+        // console.log(sender , message )
+        const receiverSocketId = getReceiverSocketId(reciever)
+        console.log({receiverSocketId})
+        io.to(receiverSocketId).emit("newRequest", req.body)
+        res.json(req.body)
 
     }
     catch(e){

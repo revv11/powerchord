@@ -13,20 +13,24 @@ export  async function GET(req: NextRequest){
         const username = String(token?.username);
     
     
-        const users = await db.user.findMany({
+        const users = await db.user.findUnique({
             where: {
-                username:{
-                    not: username
-                },
+                username
                 
             },
+
             select:{
-                username: true,
-                id:true,
-                profilepic:true,
+                Friends:{
+                    select:{
+                        username: true,
+                        id:true,
+                        profilepic:true,
+
+                    }
+                }
             }
         })
-        return NextResponse.json({users})
+        return NextResponse.json({users: users?.Friends})
     }
     catch(e){
         console.log(e)

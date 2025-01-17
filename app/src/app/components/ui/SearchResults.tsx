@@ -8,7 +8,7 @@ export default function SearchResults({data}:any){
             <div key={data.id} className="">
                 <Link href={`/${data.username}`}>
                     
-                    <li className="bg-white p-1 w-[20rem] px-6 h-10 text-xl">{data.username}</li>
+                    <li key={data.id} className="bg-white p-1 w-[20rem] px-6 h-10 text-xl">{data.username}</li>
                     <hr />
                 </Link>
             </div>

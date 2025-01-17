@@ -1,5 +1,5 @@
 "use client"
-import React, {  useState } from 'react';
+import React, {  useState, useMemo } from 'react';
 import useConversation from '@/zustand/useConversation';
 import NoChatSelected from './NoChatSelected';
 import axios from 'axios';
@@ -9,19 +9,27 @@ import Messages from './Messages';
 
 
 const ChatWindow = () => {
-  
+  const {selectedConversation} = useConversation();
+  console.log("rendered")
+  return (
+    <div className='w-[911px] rounded-lg bg-[#0E0D1D] mx-auto backdrop:blur-xl flex flex-col'>
+      {!selectedConversation? (<NoChatSelected/>): (
+        <div className=" p-4 flex flex-col">
+        <Messages/>
+        <Input/>
+        
+      </div>
+      ) }
+      
+    </div>
+  );
+};
 
-  
-  useListenMessages();
+export default ChatWindow;
 
-
-  
-  
+const Input = ()=>{
   const {selectedConversation, setMessages, messages} = useConversation();
-
-  
   const [newMessage, setNewMessage] = useState('');
-
   const sendMessage = async (e:any) => {
     e.preventDefault()
     
@@ -35,29 +43,14 @@ const ChatWindow = () => {
       
       setMessages([...messages, sent])
       
-
+  
     }
     catch(e){
       console.log(e)
     }
   };
-
-
-
-  
-  
-
-  return (
-    <div className='w-[911px] rounded-lg bg-[#0E0D1D] mx-auto backdrop:blur-xl flex flex-col'>
-      {!selectedConversation? (<NoChatSelected/>): (
-        <div className=" p-4 flex flex-col">
-        
-
-
-        <Messages/>
-          
-       
-        <form className="flex">
+  return(
+    <form className="flex">
           <input
             type="text"
             value={newMessage}
@@ -72,11 +65,5 @@ const ChatWindow = () => {
             Send
           </button>
         </form>
-      </div>
-      ) }
-      
-    </div>
-  );
-};
-
-export default ChatWindow;
+  )
+}

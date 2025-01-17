@@ -9,16 +9,18 @@ interface User{
     name?: string | null,
     email?: string | null,
     username?: string | null,
+    friendreq?: any[],
+    friends?: any[],
 }
 
 
 
-export const UserContext = createContext<User>({id: undefined })
+export const UserContext = createContext<User>({id:undefined})
 
 export const useUserContext = (): User=>{
     const context = useContext(UserContext);
     if(context === undefined){
-        throw new Error("useUserContext must be used within a SocketContextProvider");
+        throw new Error("useUserContext must be used within a UserContextProvider");
     }
     return context;
 }
@@ -34,7 +36,9 @@ export const UserContextProvider = ({children}: {children: ReactNode})=>{
         async function setuser(){
             const existinguser = await axios.get(`/api/${user?.username}`)
             const data = existinguser.data.user
-            setCurrentUser({id:data?.id, name: data?.name, profilepic: data?.profilepic})
+           
+        
+            setCurrentUser({id:data?.id, name: data?.name, profilepic: data?.profilepic, friendreq: data?.FriendReq, friends: data?.Friends})
         }
         setuser();
     },[session.data?.user])

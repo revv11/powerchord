@@ -18,8 +18,8 @@ export const useGetConversation = ()=>{
             try{
                 const res = await axios.get(`/api/messages/get/${selectedConversation?.username}`)
                 
-                
                 setMessages(res.data.messages)
+              
                 setLoading(false)
                 
             }

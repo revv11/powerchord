@@ -23,6 +23,12 @@ export async function GET(req:NextRequest, {params}: {params: {username: string}
             bio:true,
             name:true,
             email:true,
+            FriendReq:true,
+            Friends:{
+                select:{
+                    username:true,
+                }
+            }
             
             
             

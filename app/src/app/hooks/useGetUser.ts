@@ -10,7 +10,7 @@ export interface User{
     createdAt: Date
     name?:string,
     bio?:string,
-    image?:string
+    Friends?: any[],
 }
 export const useGetUser  = (username:string) =>{
 
