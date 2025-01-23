@@ -1,1 +1,1 @@
-Messaging app using nextjs, ts, websockets, next-auth
+Messaging app built using nextjs, ts, websockets, next-auth
