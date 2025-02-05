@@ -1,9 +1,8 @@
 "use client"
-import React, {  useState, useMemo } from 'react';
+import React, {  useState } from 'react';
 import useConversation from '@/zustand/useConversation';
 import NoChatSelected from './NoChatSelected';
 import axios from 'axios';
-import useListenMessages from '@/app/hooks/useListenMessages';
 import Messages from './Messages';
 
 
@@ -40,8 +39,8 @@ const Input = ()=>{
     try{
       const message = await axios.put(`/api/messages/send/${selectedConversation?.username}`, {message: newMessage})
       const sent = message.data as MessageType
-      
       setMessages([...messages, sent])
+      
       
   
     }

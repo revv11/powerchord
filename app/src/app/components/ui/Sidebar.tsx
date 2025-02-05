@@ -1,4 +1,4 @@
-// components/Sidebar.tsx
+"use client"
 import React from 'react';
 import useConversation from '@/zustand/useConversation';
 import { useSocketContext } from '@/app/context/SocketContext';

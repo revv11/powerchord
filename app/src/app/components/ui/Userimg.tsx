@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link"
 import Dp from "./Dp"
 import { useUserContext } from "@/app/context/UserContext";

@@ -1,6 +1,6 @@
-"use client"
-import { signOut } from "next-auth/react"
 
+
+import Button from "./Logoutbtn";
 import Link from "next/link";
 
 import Search from "./Search";
@@ -25,10 +25,11 @@ export default function Appbar(){
         <div className="flex w-[30%] justify-end items-center space-x-10">
             <Userimg/>
            <Notification/>
-           
-            <button onClick={()=>{signOut()}} className="bg-gray-800 border border-red-800 text-white text semibold p-3 rounded-lg hover:bg-gray-700 ">Logout</button>
+           <Button/>
         </div>
     </div>
 
     )
 }
+
+

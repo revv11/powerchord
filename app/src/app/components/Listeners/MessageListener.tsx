@@ -1,3 +1,4 @@
+"use client"
 import useListenMessages from "@/app/hooks/useListenMessages";
 
 

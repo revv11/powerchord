@@ -1,8 +1,7 @@
-
+"use client"
 import axios from "axios";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
 import useConversation from "@/zustand/useConversation";
 
 

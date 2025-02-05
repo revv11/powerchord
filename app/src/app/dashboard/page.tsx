@@ -1,4 +1,4 @@
-"use client"
+
 
 import ChatWindow from '@/app/components/ui/ChatWindow';
 import MessageListener from '../components/Listeners/MessageListener';
