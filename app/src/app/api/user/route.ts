@@ -33,9 +33,11 @@ export async function POST(req: Request){
         return NextResponse.json({user: rest, message:"User created successfully!"},{status:201})
     }
     catch(e:any){
-        if(e.name=== "ZodError")
-            return NextResponse.json({user: null , message: e.issues[0].message},{status: 500})
+        if(e.name=== "ZodError") return NextResponse.json({user: null , message: e.issues[0].message},{status: 500})
 
-        console.log(e)
+        console.log(e)    
+        return NextResponse.json({user:null , message: e})
+
+
     }
 }
